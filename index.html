@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanic Quest | Parts Finder</title>
+    <meta name="description" content="Colete peças para restaurar o seu veículo nesta aventura mecânica.">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <span class="highlight">MECHANIC</span> QUEST
+            </div>
+            <div id="stats">
+                <div class="stat-item">
+                    <span class="label">Progresso</span>
+                    <span id="score">0/5</span>
+                </div>
+                <div id="inventory" class="stat-item">
+                    <span class="label">Inventário</span>
+                    <span id="inventory-status">Vazio</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="game-container">
+            <canvas id="gameCanvas"></canvas>
+
+            <div id="ui-overlay">
+                <div id="minimap-container">
+                    <canvas id="minimapCanvas"></canvas>
+                    <div class="minimap-label">RADAR</div>
+                </div>
+
+                <div id="interaction-prompt" class="hidden">
+                    Pressione [E] para coletar
+                </div>
+            </div>
+        </main>
+
+        <aside id="workshop-panel">
+            <h3>Oficina</h3>
+            <div class="car-preview">
+                <div id="car-visual">
+                    <div class="part chassis found" title="CHASSI"></div>
+                    <div class="part engine" title="MOTOR"></div>
+                    <div class="part wheel-fl" title="FR"></div>
+                    <div class="part wheel-fr" title="FL"></div>
+                    <div class="part wheel-bl" title="TR"></div>
+                    <div class="part wheel-br" title="TL"></div>
+                </div>
+            </div>
+            <div id="status-text">Buscando componentes...</div>
+        </aside>
+
+        <footer>
+            CONTROLES:<kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> MOVER | <kbd>E</kbd> INTERAGIR | LEVE AS PEÇAS
+            PARA A OFICINA (CANTO INFERIOR DIREITO)
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

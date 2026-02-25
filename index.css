@@ -1,0 +1,322 @@
+:root {
+    --primary: #00f2ff;
+    --secondary: #7000ff;
+    --bg-dark: #0a0a0c;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --text-main: #e0e0e0;
+    --accent: #ff0055;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#app {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "game workshop"
+        "footer footer";
+    grid-template-columns: 1fr 340px;
+    grid-template-rows: 70px 1fr 40px;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at top left, #1a1a2e, #0a0a0c);
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    z-index: 10;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    filter: drop-shadow(var(--glow));
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+#stats {
+    display: flex;
+    gap: 40px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+#score,
+#inventory-status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+#game-container {
+    grid-area: game;
+    position: relative;
+    overflow: hidden;
+    background: #0d0d0f;
+    border: 1px solid var(--glass-border);
+    margin: 15px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    padding: 30px;
+}
+
+#minimap-container {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 180px;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--glow), inset 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+.minimap-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    opacity: 0.2;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+#minimapCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+#interaction-prompt {
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+#workshop-panel {
+    grid-area: workshop;
+    background: var(--glass);
+    border-left: 1px solid var(--glass-border);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    backdrop-filter: blur(10px);
+}
+
+#workshop-panel h3 {
+    text-align: center;
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.car-preview {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#car-visual {
+    width: 120px;
+    height: 220px;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.part {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.6rem;
+    font-weight: 800;
+}
+
+.part.found {
+    background: var(--primary);
+    border: none;
+    box-shadow: 0 0 20px var(--primary);
+    color: #000;
+}
+
+.part.chassis {
+    top: 20px;
+    left: 10px;
+    width: 100px;
+    height: 180px;
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.part.engine {
+    top: 40px;
+    left: 25px;
+    width: 70px;
+    height: 50px;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+.part.wheel-fl {
+    top: 30px;
+    left: -15px;
+    width: 25px;
+    height: 45px;
+    z-index: 0;
+    border-radius: 5px;
+}
+
+.part.wheel-fr {
+    top: 30px;
+    right: -15px;
+    width: 25px;
+    height: 45px;
+    z-index: 0;
+    border-radius: 5px;
+}
+
+.part.wheel-bl {
+    bottom: 30px;
+    left: -15px;
+    width: 25px;
+    height: 45px;
+    z-index: 0;
+    border-radius: 5px;
+}
+
+.part.wheel-br {
+    bottom: 30px;
+    right: -15px;
+    width: 25px;
+    height: 45px;
+    z-index: 0;
+    border-radius: 5px;
+}
+
+#status-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--glass-border);
+}
+
+kbd {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--primary);
+    margin: 0 5px;
+    border: 1px solid var(--glass-border);
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0px var(--primary);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 0 20px var(--primary);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 0px var(--primary);
+    }
+}
