@@ -2,49 +2,42 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sky Dash - Flappy Style</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Snake Domain .io</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div id="game-container">
-        <!-- Parallax Backgrounds inside canvas -->
-        <canvas id="gameCanvas"></canvas>
+        <!-- Otimização: Camadas separadas -->
+        <canvas id="bg-layer"></canvas>
+        <canvas id="trail-layer"></canvas>
+        <canvas id="entity-layer"></canvas>
+        <canvas id="minimap-layer"></canvas>
         
         <div id="ui-layer">
-            <h1 id="score-display" class="hidden">0</h1>
-            
-            <div id="start-screen" class="glass-panel">
-                <div class="logo-container">
-                    <h2>Sky Dash</h2>
-                    <span class="subtitle">Flappy Style</span>
-                </div>
-                <div class="instructions">
-                    <div class="key-icon">↑</div>
-                    <p>Clique, Toque ou Pressione Espaço para voar!</p>
-                </div>
+            <h1 id="score-text">Território: 0%</h1>
+            <div id="stats-panel">
+                <p id="best-score-text">Recorde: 0%</p>
+                <p id="last-score-text">Último: 0%</p>
             </div>
-
-            <div id="game-over-screen" class="glass-panel hidden">
-                <h2 class="game-over-title">Game Over!</h2>
-                <div class="score-board">
-                    <div class="score-box">
-                        <span class="score-label">Score</span>
-                        <span id="final-score" class="score-value">0</span>
-                    </div>
-                    <div class="score-box">
-                        <span class="score-label">Melhor</span>
-                        <span id="best-score" class="score-value">0</span>
-                    </div>
-                </div>
-                <button id="restart-btn" class="btn primary-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                    Tentar Novamente
-                </button>
+            <div id="game-over-screen" class="hidden">
+                <h2>Você foi eliminado!</h2>
+                <p id="death-reason">Motivo da morte</p>
+                <p id="final-score" style="margin-bottom: 20px; font-weight: bold; color: #fff;">Sua pontuação final: 0%</p>
+                <button id="respawn-btn">Jogar Novamente</button>
+            </div>
+            <div id="pause-screen" class="hidden">
+                <h2>Jogo Pausado</h2>
+                <button id="resume-btn">Continuar</button>
+            </div>
+            <div id="leaderboard">
+                <h3>Top Players</h3>
+                <ol id="leaderboard-list">
+                    <li>Player 1</li>
+                </ol>
             </div>
         </div>
     </div>
-    <script src="game.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
