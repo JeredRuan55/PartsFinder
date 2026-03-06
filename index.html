@@ -1,72 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanic Quest | Parts Finder</title>
-    <meta name="description" content="Colete peças para restaurar o seu veículo nesta aventura mecânica.">
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sky Dash - Flappy Style</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div id="app">
-        <header>
-            <div class="logo">
-                <span class="highlight">MECHANIC</span> QUEST
-            </div>
-            <div id="stats">
-                <div class="stat-item">
-                    <span class="label">Progresso</span>
-                    <span id="score">0/5</span>
+    <div id="game-container">
+        <!-- Parallax Backgrounds inside canvas -->
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-layer">
+            <h1 id="score-display" class="hidden">0</h1>
+            
+            <div id="start-screen" class="glass-panel">
+                <div class="logo-container">
+                    <h2>Sky Dash</h2>
+                    <span class="subtitle">Flappy Style</span>
                 </div>
-                <div id="inventory" class="stat-item">
-                    <span class="label">Inventário</span>
-                    <span id="inventory-status">Vazio</span>
-                </div>
-            </div>
-        </header>
-
-        <main id="game-container">
-            <canvas id="gameCanvas"></canvas>
-
-            <div id="ui-overlay">
-                <div id="minimap-container">
-                    <canvas id="minimapCanvas"></canvas>
-                    <div class="minimap-label">RADAR</div>
-                </div>
-
-                <div id="interaction-prompt" class="hidden">
-                    Pressione [E] para coletar
+                <div class="instructions">
+                    <div class="key-icon">↑</div>
+                    <p>Clique, Toque ou Pressione Espaço para voar!</p>
                 </div>
             </div>
-        </main>
 
-        <aside id="workshop-panel">
-            <h3>Oficina</h3>
-            <div class="car-preview">
-                <div id="car-visual">
-                    <div class="part chassis found" title="CHASSI"></div>
-                    <div class="part engine" title="MOTOR"></div>
-                    <div class="part wheel-fl" title="FR"></div>
-                    <div class="part wheel-fr" title="FL"></div>
-                    <div class="part wheel-bl" title="TR"></div>
-                    <div class="part wheel-br" title="TL"></div>
+            <div id="game-over-screen" class="glass-panel hidden">
+                <h2 class="game-over-title">Game Over!</h2>
+                <div class="score-board">
+                    <div class="score-box">
+                        <span class="score-label">Score</span>
+                        <span id="final-score" class="score-value">0</span>
+                    </div>
+                    <div class="score-box">
+                        <span class="score-label">Melhor</span>
+                        <span id="best-score" class="score-value">0</span>
+                    </div>
                 </div>
+                <button id="restart-btn" class="btn primary-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Tentar Novamente
+                </button>
             </div>
-            <div id="status-text">Buscando componentes...</div>
-        </aside>
-
-        <footer>
-            CONTROLES:<kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> MOVER | <kbd>E</kbd> INTERAGIR | LEVE AS PEÇAS
-            PARA A OFICINA (CANTO INFERIOR DIREITO)
-        </footer>
+        </div>
     </div>
-
     <script src="game.js"></script>
 </body>
-
 </html>
